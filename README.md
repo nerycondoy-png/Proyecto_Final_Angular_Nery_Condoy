@@ -1,4 +1,5 @@
 Este proyecto combina un frontend Angular y un backend Express + PostgreSQL para gestionar estudiantes, incluyendo creación, edición, eliminación y listado.
+
 El objetivo es aplicar conceptos de componentes standalone, ruteo, control flow con @if/@for, y comunicación padre-hijo.
 
 | Área | Herramienta / Framework |
@@ -20,7 +21,7 @@ npm install
 
 3. Ejecutar el frontend
 ng serve
-Luego abre http://localhost:4200 (localhost in Bing) en tu navegador.
+Luego abre http://localhost:4200 en tu navegador.
 
 4. Ejecutar el backend
 cd backend
@@ -34,7 +35,8 @@ Funcionalidades principales
 - Integración con Docker para entorno de desarrollo.
 - Diseño responsive y navegación optimizada.
 
-Estructura del proyecto
+Estructura del proyecto:
+
 Proyecto_Final_Angular_Nery_Condoy/
 │
 ├── proyecto_final/        # Código Angular
@@ -53,6 +55,6 @@ Proyecto_Final_Angular_Nery_Condoy/
 
 Autor:
 Nery Condoy  
-Desarrollador en formación – Curso Avanzado de Angular
+Arquitecto de soluciones/Desarrollador – Curso Avanzado de Angular
 Loja, Ecuador
 
