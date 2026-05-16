@@ -1,0 +1,91 @@
+<h1>Editar Estudiante</h1>
+
+<!-- 🔹 Mensaje de carga con spinner -->
+@if (loading) {
+  <div style="display: flex; align-items: center; gap: 8px;">
+    <span class="spinner" style="
+      width: 18px; height: 18px; 
+      border: 3px solid #ccc; 
+      border-top: 3px solid #1A73E8; 
+      border-radius: 50%; 
+      animation: spin 1s linear infinite;">
+    </span>
+    <p>Cargando estudiante...</p>
+  </div>
+}
+
+<!-- 🔹 Mensaje de error -->
+@if (errorMessage) {
+  <p style="color: red; font-weight: bold;">{{ errorMessage }}</p>
+}
+
+<!-- 🔹 Formulario -->
+@if (!loading) {
+  <form [formGroup]="form" (ngSubmit)="save()" style="max-width: 400px; margin-top: 16px;">
+    <label for="firstName">Nombres</label>
+    <input
+      id="firstName"
+      type="text"
+      formControlName="firstName"
+      placeholder="Ingrese nombres"
+      style="width: 100%; padding: 6px; margin-bottom: 10px;"
+    />
+
+    <label for="lastName">Apellidos</label>
+    <input
+      id="lastName"
+      type="text"
+      formControlName="lastName"
+      placeholder="Ingrese apellidos"
+      style="width: 100%; padding: 6px; margin-bottom: 10px;"
+    />
+
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      placeholder="ejemplo@correo.com"
+      style="width: 100%; padding: 6px; margin-bottom: 10px;"
+    />
+
+    <label style="display: flex; align-items: center; gap: 6px; margin-bottom: 12px;">
+      <input type="checkbox" formControlName="active" />
+      Activo
+    </label>
+
+    <!-- 🔹 Botón estilizado -->
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      style="
+        background-color: #1A73E8;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+      "
+    >
+      💾 Guardar Cambios
+    </button>
+  </form>
+}
+
+<!-- 🔹 Animación CSS para spinner -->
+<style>
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  input:invalid {
+    border: 1px solid red;
+  }
+  input:valid {
+    border: 1px solid #ccc;
+  }
+  button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+</style>

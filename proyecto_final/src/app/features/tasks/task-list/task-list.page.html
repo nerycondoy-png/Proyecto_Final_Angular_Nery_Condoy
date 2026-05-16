@@ -1,0 +1,43 @@
+<section class="section">
+  <h1>Listado de Tareas</h1>
+
+  <!-- Botones de filtro -->
+  <div class="actions">
+    <button (click)="filterByStatus('all')">Todas</button>
+    <button (click)="filterByStatus('pending')">Pendientes</button>
+    <button (click)="filterByStatus('done')">Terminadas</button>
+  </div>
+
+  <!-- CORRECCIÓN: loading ya NO es loading() -->
+  @if (loading) {
+  <p>Cargando tareas...</p>
+  }
+
+  <!-- CORRECCIÓN: error ya NO es error() -->
+  @if (error) {
+  <p class="error">{{ error }}</p>
+  }
+
+  <!-- Estado: lista vacía -->
+  @if (!loading && !error && filteredTasks.length === 0) {
+  <p>No hay tareas que coincidan con el filtro.</p>
+  }
+
+  <!-- Lista de tareas -->
+  <div class="grid">
+    @for (task of filteredTasks; track task.id) {
+    <article class="card">
+      <h2>{{ task.title | capitalize }}</h2>
+      <p>{{ task.description | truncate:80 }}</p>
+      <p [style.color]="task.status | statusColor">
+        Estado: {{ task.statusLabel }}
+      </p>
+      <p>
+        Prioridad: {{ task.priorityLabel }} {{ task.priority | priorityIcon }}
+      </p>
+      <button (click)="goToDetail(task.id)">Ver detalle</button>
+    </article>
+
+    }
+  </div>
+</section>

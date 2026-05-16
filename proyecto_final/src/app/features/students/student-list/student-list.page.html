@@ -1,0 +1,83 @@
+<h1>Lista de Estudiantes</h1>
+
+<p>
+  <button [routerLink]="['/students/create']">
+    ➕ Crear estudiante
+  </button>
+</p>
+
+<!-- 🔹 Mensaje de carga con spinner -->
+@if (loading) {
+  <div style="display: flex; align-items: center; gap: 8px;">
+    <span class="spinner" style="
+      width: 18px; height: 18px; 
+      border: 3px solid #ccc; 
+      border-top: 3px solid #1A73E8; 
+      border-radius: 50%; 
+      animation: spin 1s linear infinite;">
+    </span>
+    <p>Cargando estudiantes...</p>
+  </div>
+}
+
+<!-- 🔹 Mensaje de error -->
+@if (errorMessage) {
+  <p style="color: red; font-weight: bold;">{{ errorMessage }}</p>
+}
+
+<!-- 🔹 Mensaje si no hay registros -->
+@if (!loading && students.length === 0) {
+  <p>No hay estudiantes registrados.</p>
+}
+
+<!-- 🔹 Tabla de estudiantes -->
+@if (students.length > 0) {
+  <table
+    cellpadding="8"
+    cellspacing="0"
+    style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;"
+  >
+    <thead style="background-color: #f5f5f5;">
+      <tr>
+        <th>ID</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Email</th>
+        <th>Activo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (s of students; track s.id) {
+        <tr style="border-bottom: 1px solid #eee;">
+          <td>{{ s.id }}</td>
+          <td>{{ s.firstName }}</td>
+          <td>{{ s.lastName }}</td>
+          <td>{{ s.email }}</td>
+          <td>{{ s.activeLabel }}</td>
+          <td>
+            <a [routerLink]="['/students', s.id, 'edit']" style="color: #1A73E8;">
+              ✏️ Editar
+            </a>
+            &nbsp;|&nbsp;
+            <button
+              (click)="delete(s.id)"
+              style="color: red; background: none; border: none; cursor: pointer;"
+            >
+              🗑️ Eliminar
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+<!-- 🔹 Animación CSS para spinner -->
+<style>
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+</style>

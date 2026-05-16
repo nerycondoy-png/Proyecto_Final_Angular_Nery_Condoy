@@ -1,0 +1,31 @@
+<section class="section">
+  <h1>Detalle de Tarea</h1>
+
+  <!--
+    CORRECCIÓN:
+    Ya no usamos loading() ni error() porque TaskDetailPage
+    ahora depende del store y solo muestra la tarea encontrada.
+  -->
+
+  @if (task()) {
+    <article class="card">
+      <h2>{{ task()!.title }}</h2>
+      <p>{{ task()!.description }}</p>
+
+      <p><strong>Estado:</strong> {{ task()!.statusLabel }}</p>
+      <p><strong>Prioridad:</strong> {{ task()!.priorityLabel }}</p>
+      <p><strong>Estudiante:</strong> {{ task()!.studentLabel }}</p>
+      <p><strong>Fecha límite:</strong> {{ task()!.dueDateLabel }}</p>
+
+      <!-- Botón para volver -->
+      <button routerLink="/tasks">Volver al listado</button>
+    </article>
+  } @else {
+    <!--
+      Mensaje de respaldo:
+      Normalmente no se muestra porque redirigimos antes,
+      pero es buena práctica dejarlo.
+    -->
+    <p>No se encontró la tarea.</p>
+  }
+</section>

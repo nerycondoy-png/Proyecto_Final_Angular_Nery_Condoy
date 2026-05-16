@@ -1,0 +1,19 @@
+<section class="section">
+  @if (task$ | async; as task) {
+    <h1>Editar: {{ task.title }}</h1>
+
+    <form [formGroup]="form" (ngSubmit)="updateTask()">
+      <label>
+        Título
+        <input formControlName="title" />
+      </label>
+
+      <label>
+        Descripción
+        <textarea formControlName="description"></textarea>
+      </label>
+
+      <button type="submit">Guardar cambios</button>
+    </form>
+  }
+</section>

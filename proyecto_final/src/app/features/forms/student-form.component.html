@@ -1,0 +1,30 @@
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+  <label>Nombre:</label>
+  <input formControlName="name" />
+  <div *ngIf="studentForm.get('name')?.invalid && studentForm.get('name')?.touched">
+    Nombre es obligatorio y mínimo 3 caracteres
+  </div>
+
+  <label>Email:</label>
+  <input formControlName="email" />
+  <div *ngIf="studentForm.get('email')?.invalid && studentForm.get('email')?.touched">
+    Email inválido o no termina en @cnkcore.edu
+  </div>
+
+  <label>Edad:</label>
+  <input type="number" formControlName="age" />
+  <div *ngIf="studentForm.get('age')?.invalid && studentForm.get('age')?.touched">
+    Debe ser mayor de 18
+  </div>
+
+  <label>Materias:</label>
+  <div formArrayName="subjects">
+    <div *ngFor="let subject of subjects.controls; let i = index">
+      <input [formControlName]="i" placeholder="Materia" />
+      <button type="button" (click)="removeSubject(i)">Eliminar</button>
+    </div>
+  </div>
+  <button type="button" (click)="addSubject()">Agregar materia</button>
+
+  <button type="submit" [disabled]="studentForm.invalid">Guardar</button>
+</form>

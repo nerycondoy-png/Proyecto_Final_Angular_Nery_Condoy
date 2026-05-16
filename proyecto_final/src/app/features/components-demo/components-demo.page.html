@@ -1,0 +1,44 @@
+<!--
+  Objetivo del ejercicio:
+  Practicar input() y output() entre componentes.
+
+  Que debe implementar el estudiante:
+  - Crear un output adicional en StudentCardComponent.
+  - Completar la eliminacion en este componente padre.
+
+  Pistas:
+  - El padre conoce la lista.
+  - El hijo solo avisa que ocurrio un evento.
+
+  Resultado esperado:
+  Al seleccionar una tarjeta, se muestra el estudiante seleccionado.
+-->
+<h1>Demo de Componentes</h1>
+
+<div style="display: flex; gap: 20px;">
+  <div style="flex: 1;">
+    <h2>Lista de estudiantes</h2>
+
+    @for (student of students; track student.id) {
+      <app-student-card
+        [student]="student"
+        (selected)="onStudentSelected($event)"
+        (removeRequested)="onRemoveRequested($event)"
+      ></app-student-card>
+    }
+  </div>
+
+  <div style="flex: 1;">
+    <h2>Detalle</h2>
+
+    @if (selectedStudent) {
+      <p><strong>Nombre:</strong> {{ selectedStudent.fullName }}</p>
+      <p><strong>Email:</strong> {{ selectedStudent.email }}</p>
+      <p><strong>Estado:</strong> {{ selectedStudent.activeLabel }}</p>
+    }
+
+    @if (message) {
+      <p style="color: red;">{{ message }}</p>
+    }
+  </div>
+</div>
